@@ -22,5 +22,36 @@ namespace NeuralNetworks.BackPropagation
                 Assert.IsTrue(difference < epsilon);
             }
         }
+
+        [TestMethod]
+        public void TestNeuronReset()
+        {
+            var activationFunction = new DifferentiableFunction(x => x);
+
+            var input1 = new InputNeuron(0);
+            var input2 = new InputNeuron(0);
+            var synapse111 = new Synapse(input1, 1);
+            var synapse112 = new Synapse(input2, 1);
+            var synapse121 = new Synapse(input1, 1);
+            var synapse122 = new Synapse(input2, 1);
+            var neuron1 = new Neuron(activationFunction, 0, synapse111, synapse112);
+            var neuron2 = new Neuron(activationFunction, 0, synapse121, synapse122);
+            var synapse211 = new Synapse(neuron1, 1);
+            var synapse212 = new Synapse(neuron2, 1);
+            var synapse221 = new Synapse(neuron1, 1);
+            var synapse222 = new Synapse(neuron2, 1);
+            var output1 = new Neuron(activationFunction, 0, synapse211, synapse212);
+            var output2 = new Neuron(activationFunction, 0, synapse221, synapse222);
+
+            input1.Value = 1;
+            input2.Value = 1;
+            var o1 = output1.Value;
+            var o2 = output2.Value;
+
+            synapse111.Weight = 2;
+            neuron1.Offset = 1;
+            o1 = output1.Value;
+            o2 = output2.Value;
+        }
     }
 }

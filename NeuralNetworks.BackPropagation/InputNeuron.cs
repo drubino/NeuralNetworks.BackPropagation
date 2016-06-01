@@ -8,13 +8,35 @@ namespace NeuralNetworks.BackPropagation
 {
     public class InputNeuron : INeuron
     {
-        public double Value { get; private set; }
+        private double value;
+        private HashSet<Synapse> downstreamSynapses = new HashSet<Synapse>();
+        public double Value
+        {
+            get { return this.value; }
+            set
+            {
+                if (this.value != value)
+                {
+                    this.value = value;
+                    Reset();
+                }
+            }
+        }
 
         public InputNeuron(double initialValue)
         {
-            this.Value = initialValue;
+            this.value = initialValue;
         }
 
-        public void UpdateValue() { }
+        public void AddDownstreamSynapse(Synapse synapse)
+        {
+            this.downstreamSynapses.Add(synapse);
+        }
+
+        public void Reset()
+        {
+            foreach (var synapse in this.downstreamSynapses)
+                synapse.Reset();
+        }
     }
 }

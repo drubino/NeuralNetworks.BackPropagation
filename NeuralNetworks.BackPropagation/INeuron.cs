@@ -9,6 +9,7 @@ namespace NeuralNetworks.BackPropagation
     public interface INeuron
     {
         double Value { get; }
-        void UpdateValue();
+        void AddDownstreamSynapse(Synapse synapse);
+        void Reset();
     }
 }

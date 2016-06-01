@@ -26,7 +26,7 @@ namespace NeuralNetworks.BackPropagation
             return this.function(new[] { input });
         }
 
-        public double Evaluate(double[] input)
+        public double Evaluate(params double[] input)
         {
             return this.function(input);
         }
