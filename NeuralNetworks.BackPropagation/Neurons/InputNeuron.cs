@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeuralNetworks.BackPropagation
+namespace NeuralNetworks.BackPropagation.Neurons
 {
     public class InputNeuron : INeuron
     {
@@ -23,7 +23,7 @@ namespace NeuralNetworks.BackPropagation
             }
         }
 
-        public InputNeuron(double initialValue)
+        public InputNeuron(double initialValue = 0)
         {
             this.value = initialValue;
         }

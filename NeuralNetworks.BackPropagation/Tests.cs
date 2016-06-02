@@ -1,12 +1,17 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using NeuralNetworks.BackPropagation.Computation;
+using NeuralNetworks.BackPropagation.Neurons;
+using NeuralNetworks.BackPropagation.Networks;
 
 namespace NeuralNetworks.BackPropagation
 {
     [TestClass]
     public class Tests
     {
+        #region TestDifferentiableFunction
+
         [TestMethod]
         public void TestDifferentiableFunction()
         {
@@ -22,6 +27,10 @@ namespace NeuralNetworks.BackPropagation
                 Assert.IsTrue(difference < epsilon);
             }
         }
+
+        #endregion //TestDifferentiableFunction
+
+        #region TestNeuronReset
 
         [TestMethod]
         public void TestNeuronReset()
@@ -53,5 +62,29 @@ namespace NeuralNetworks.BackPropagation
             o1 = output1.Value;
             o2 = output2.Value;
         }
+
+        #endregion //TestNeuronReset
+
+        #region TestNeuralNetwork
+
+        [TestMethod]
+        public void TestNeuralNetwork()
+        {
+            var activationFunction = new DifferentiableFunction(x => 1 / (1 + Math.Exp(-x)));
+            var weightGenerator = new GaussianGenerator();
+            var network = new NeuralNetwork(activationFunction, weightGenerator);
+
+            network
+                .AddInputs(2)
+                .AddLayer()
+                    .AddFeatureMap(2)
+                    .AddFeatureMap(2)
+                    .NeuralNetwork
+                .AddOutputs(2);
+
+            var result = network.Execute(1, 1);
+        }
+
+        #endregion //TestNeuralNetwork
     }
 }

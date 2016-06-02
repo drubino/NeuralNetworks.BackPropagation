@@ -1,4 +1,4 @@
-﻿namespace NeuralNetworks.BackPropagation
+﻿namespace NeuralNetworks.BackPropagation.Neurons
 {
     public class Synapse
     {

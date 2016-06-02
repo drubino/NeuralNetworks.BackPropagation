@@ -50,14 +50,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DifferentiableFunction.cs" />
-    <Compile Include="INeuron.cs" />
-    <Compile Include="Neuron.cs" />
-    <Compile Include="InputNeuron.cs" />
-    <Compile Include="Synapse.cs" />
+    <Compile Include="Computation\DifferentiableFunction.cs" />
+    <Compile Include="Computation\GaussianGenerator.cs" />
+    <Compile Include="Networks\NeuralNetworkFeatureMap.cs" />
+    <Compile Include="Networks\NeuralNetworkLayer.cs" />
+    <Compile Include="Neurons\INeuron.cs" />
+    <Compile Include="Networks\NeuralNetwork.cs" />
+    <Compile Include="Neurons\Neuron.cs" />
+    <Compile Include="Neurons\InputNeuron.cs" />
+    <Compile Include="Computation\IRandomNumberGenerator.cs" />
+    <Compile Include="Neurons\Synapse.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
