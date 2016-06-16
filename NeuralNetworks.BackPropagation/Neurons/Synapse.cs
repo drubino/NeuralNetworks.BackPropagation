@@ -6,6 +6,7 @@
         private double weight;
 
         public INeuron Neuron { get; private set; }
+        public INeuron Parent { get { return this.parent; } }
         public double Weight
         {
             get { return this.weight; }

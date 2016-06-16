@@ -4,6 +4,7 @@ using System.Linq;
 using NeuralNetworks.BackPropagation.Computation;
 using NeuralNetworks.BackPropagation.Neurons;
 using NeuralNetworks.BackPropagation.Networks;
+using NeuralNetworks.BackPropagation.Training;
 
 namespace NeuralNetworks.BackPropagation
 {
@@ -83,8 +84,47 @@ namespace NeuralNetworks.BackPropagation
                 .AddOutputs(2);
 
             var result = network.Execute(1, 1);
+            var result2 = network.Execute(2, 2);
+            var result3 = network.Execute(1, 1);
+
         }
 
         #endregion //TestNeuralNetwork
+
+        #region TestGradientDescentTrainer
+
+        [TestMethod]
+        public void TestGradientDescentTrainer()
+        {
+            var activationFunction = new DifferentiableFunction(x => 1 / (1 + Math.Exp(-x)));
+            var weightGenerator = new GaussianGenerator();
+            var network = new NeuralNetwork(activationFunction, weightGenerator);
+            var trainer = new GradientDescentTrainer(network, .01);
+
+            network
+                .AddInputs(1)
+                .AddLayer()
+                    .AddFeatureMap(10)
+                    .NeuralNetwork
+                .AddLayer()
+                    .AddFeatureMap(10)
+                    .NeuralNetwork
+                .AddOutputs(1);
+
+            Func<double, double, double> train = (input, targetOutput) => 
+                trainer.Train(new double[] { input }, new double[] { targetOutput }).Single();
+            Func<double, double> execute = input =>
+                network.Execute(input).First();
+
+            var random = new Random();
+            foreach (var value in Enumerable.Range(0, 100000))
+            {
+                var input = random.NextDouble();
+                var targetOutput = Math.Round(input);
+                train(input, targetOutput);
+            }
+        }
+
+        #endregion //TestGradientDescentTrainer
     }
 }

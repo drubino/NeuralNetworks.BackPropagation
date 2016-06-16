@@ -16,6 +16,7 @@ namespace NeuralNetworks.BackPropagation.Neurons
         private HashSet<Synapse> downstreamSynapses = new HashSet<Synapse>();
 
         public IEnumerable<Synapse> Synapses { get; protected set; }
+        public IEnumerable<Synapse> DownstreamSynapses { get { return this.downstreamSynapses; } }
         public DifferentiableFunction ActivationFunction { get; protected set; }
         public double Offset
         {

@@ -21,6 +21,7 @@ namespace NeuralNetworks.BackPropagation.Networks
 
         public ICollection<InputNeuron> InputNeurons { get { return this.inputNeurons; } }
         public ICollection<INeuron> OutputNeurons { get { return this.outputNeurons; } }
+        public IEnumerable<NeuralNetworkLayer> Layers { get { return this.layers; } }
 
         public NeuralNetwork(
             DifferentiableFunction activationFunction, 
@@ -91,7 +92,7 @@ namespace NeuralNetworks.BackPropagation.Networks
             this.outputNeurons = new ReadOnlyCollection<INeuron>(
                 Enumerable.Range(0, numberOfNeurons)
                 .Select(i => (INeuron)new Neuron(
-                    this.activationFunction,
+                    new DifferentiableFunction(x => x),
                     this.weightGenerator.Next(),
                     inputs.Select(n => new Synapse(n, this.weightGenerator.Next())).ToArray()))
                 .ToList());
